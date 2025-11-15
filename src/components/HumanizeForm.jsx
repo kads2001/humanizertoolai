@@ -1,9 +1,14 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export default function HumanizeForm({ onHumanize }) {
+export default function HumanizeForm({ onHumanize, externalPreset }) {
   const [input, setInput] = useState("");
   const [tone, setTone] = useState("neutral");
+
+  useEffect(() => {
+    if (externalPreset?.text) setInput(externalPreset.text);
+    if (externalPreset?.tone) setTone(externalPreset.tone);
+  }, [externalPreset]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
